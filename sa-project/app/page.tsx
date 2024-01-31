@@ -1,56 +1,80 @@
 
-import AuthButton from "@/components/AuthButton";
-import { register } from "./actions";
+import Link from "next/link";
+import { headers, cookies } from "next/headers";
+import { createClient } from "@/utils/supabase/server";
+import { redirect } from "next/navigation";
 
-export default async function Index() {
+export default function Login({
+  searchParams,
+}: {
+  searchParams: { message: string };
+}) {
+  const signIn = async (formData: FormData) => {
+    "use server";
+
+    const email = formData.get("email") as string;
+    const password = formData.get("password") as string;
+    const cookieStore = cookies();
+    const supabase = createClient(cookieStore);
+
+    const { error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
+
+    if (error) {
+      return redirect("/login?message=Could not authenticate user");
+    }
+
+    return redirect("/");
+  };
 
 
   return (
-    <div className="flex-1 w-full flex flex-col gap-20 items-center">
-      <div className=" flex-1 flex flex-col gap-20  max-w-4xl px-3">
-        <AuthButton/>
-        <main className="flex-1 flex flex-col gap-6">
-          <form action={register}>
-          <div>
-            <label className="text-md" htmlFor="fullname">
-              Fullname
-            </label>
-            <input
-              className="rounded-md px-4 py-2 bg-inherit border mb-6"
-              name="fullname"
-              placeholder="Fullname"
-              required
-            />
-          </div>
-          <div>
-            <label className="text-md" htmlFor="email">
-            Email
-            </label>
-            <input
-              className="rounded-md px-4 py-2 bg-inherit border mb-6"
-              name="email"
-              placeholder="Email"
-              required
-            />
-          </div>
-          <div>
-            <label className="text-md" htmlFor="password">
-            Password
-            </label>
-            <input
-              className="rounded-md px-4 py-2 bg-inherit border mb-6"
-              name="password"
-              placeholder="Password"
-              required
-            />
-          </div>
-          
-          <button className="bg-green-700 rounded-md px-4 py-2 text-foreground mb-2">
-          Register
+    <div className=" py-20 flex flex-col w-full px-8 sm:max-w-md justify-center gap-2">
+      <form
+        className="animate-in flex-1 flex flex-col w-full justify-center gap-2 text-foreground"
+        action={signIn}
+      >
+        <label className="text-md" htmlFor="email">
+          Email
+        </label>
+        <input
+          className="rounded-md px-4 py-2 bg-inherit border mb-6"
+          name="email"
+          placeholder="you@example.com"
+          required
+        />
+        <label className="text-md" htmlFor="password">
+          Password
+        </label>
+        <input
+          className="rounded-md px-4 py-2 bg-inherit border mb-6"
+          type="password"
+          name="password"
+          placeholder="••••••••"
+          required
+        />
+
+        <button className="bg-yellow-700   hover:bg-yellow-600 rounded-md px-4 py-2 text-foreground mb-2">
+          Sign In
         </button>
-        </form>
-        </main>
-      </div>
+  
+        <button
+          className="border border-foreground/20 rounded-md px-4 py-2 text-foreground mb-2"
+        >
+          <Link href='/register'>
+          Sign Up
+          </Link>
+        </button>
+  
+        {searchParams?.message && (
+          <p className="mt-4 p-4 bg-foreground/10 text-foreground text-center">
+            {searchParams.message}
+          </p>
+        )}
+      </form>
+    
     </div>
   );
 }
