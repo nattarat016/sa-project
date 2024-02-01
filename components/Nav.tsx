@@ -1,19 +1,14 @@
-// 'use client'
+
 import Link from "next/link";
 import AuthButton from "./AuthButton";
-// import { useState } from "react";
+import Dropdown from "./Dropdown";
 
 export default function Nav() {
-  // const [isOpen, setIsOpen] = useState(false);
+  
 
-  // const toggleDropdown = () => {
-  //   setIsOpen(!isOpen);
-  // };
-
-  // const options = ['Option 1', 'Option 2', 'Option 3'];
 
   return (
-    <nav className="bg-white border-gray-200 dark:bg-gray-800">
+    <nav className="bg-white border-gray-200 dark:bg-gray-800 min-w-full">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
         <Link href="/user">
           <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
@@ -152,26 +147,9 @@ export default function Nav() {
               </Link>
             </li>
             <li>
-            {/* <div className="relative">
-      <button
-        onClick={toggleDropdown}
-        className="bg-blue-500 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-      >
-        Select an option
-      </button>
+            <Dropdown/>
 
-      {isOpen && (
-        <div className="absolute top-0 mt-2 bg-white border rounded shadow-md">
-          {options.map((option, index) => (
-            <div key={index} className="p-2">
-              {option}
-            </div>
-          ))}
-        </div>
-      )}
-    </div> */}
-
-              <AuthButton />
+              {/* <AuthButton /> */}
             </li>
           </ul>
         </div>
