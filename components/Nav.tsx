@@ -149,7 +149,7 @@ export default function Nav() {
             <li>
             <Dropdown/>
 
-              {/* <AuthButton /> */}
+              <AuthButton />
             </li>
           </ul>
         </div>

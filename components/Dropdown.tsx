@@ -5,6 +5,7 @@ import React, { useState } from "react";
 
 function Dropdown() {
   const [isOpen, setIsOpen] = useState(false);
+  const img = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQMSIYfCJdNMn2ZflsSbPpfXXaTDvqZ5NlWvw&usqp=CAU"
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
@@ -15,15 +16,16 @@ function Dropdown() {
       <div className="relative">
         <button
           onClick={toggleDropdown}
-          className="bg-blue-500 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+          className="bg-blue-500 bg-cover focus:outline-none overflow-hidden w-10 h-10  focus:shadow-outline  rounded-full  "
         >
-          Select an option
+            <img className=" h-auto w-auto " src={img} alt="" />
+          
         </button>
 
         {isOpen && (
-          <div className=" flex flex-col absolute top-8 mt-2 bg-white border rounded shadow-md w-full text-black">
+          <div className=" p-2 w-fit flex flex-col absolute top-8 mt-2 bg-white border rounded shadow-md text-black">
             {options.map((option, index) => (
-              <Link key={index} className="p-2" href="/">
+              <Link key={index} className="p-2  text-nowrap" href="/">
                 {option}
               </Link>
             ))}
