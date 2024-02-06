@@ -5,7 +5,11 @@ import { cookies, headers } from "next/headers";
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 
-export default async function Index() {
+export default async function Index({
+  searchParams,
+}: {
+  searchParams: { message: string };
+}) {
   const signUp = async (formData: FormData) => {
     "use server";
 
@@ -14,6 +18,7 @@ export default async function Index() {
     const password = formData.get("password") as string;
     const cookieStore = cookies();
     const supabase = createClient(cookieStore);
+    console.log(email,password)
 
     const { error } = await supabase.auth.signUp({
       email,
@@ -24,8 +29,11 @@ export default async function Index() {
     });
 
     if (error) {
+      console.log(error)
       return redirect("/register?message=Could not authenticate user");
     }
+
+    
 
     return redirect(
       "/register?message=Check email to continue sign in process"
@@ -57,7 +65,7 @@ export default async function Index() {
 
       <div className=" flex-1 flex flex-col gap-5  max-w-4xl px-3">
         <main className="flex-1 flex flex-col gap-6 ">
-          <form action={register}>
+          <form action={signUp}>
             <div>
               <label className="text-md" htmlFor="fullname">
                 username
@@ -88,21 +96,28 @@ export default async function Index() {
               </label>
               <br />
               <input
-                className="rounded-md px-4 py-2 bg-inherit border mb-6"
-                name="password"
-                placeholder="Password"
-                required
-              />
+          className="rounded-md px-4 py-2 bg-inherit border mb-6"
+          type="password"
+          name="password"
+          placeholder="••••••••"
+          required
+        />
             </div>
             <button
-              formAction={signUp}
+              // formAction={signUp}
               className="bg-green-700  text-white hover:bg-green-600 rounded-md px-4 py-2 text-foreground mb-2"
             >
               Sign Up
             </button>
+            {searchParams?.message && (
+          <p className="mt-4 p-4 bg-foreground/10 text-foreground text-center ">
+            {searchParams.message}
+          </p>
+        )}
           </form>
         </main>
       </div>
+      
     </div>
   );
 }
