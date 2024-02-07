@@ -1,4 +1,4 @@
-import AuthButton from "@/components/AuthButton";
+import AuthButton from "@/app/components/AuthButton";
 import { register } from "../actions";
 import Link from "next/link";
 import { cookies, headers } from "next/headers";
