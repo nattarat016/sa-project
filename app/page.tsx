@@ -1,6 +1,7 @@
 import { Box, Button, Link } from '@mui/material'
 import React from 'react'
 import Login from './login/page';
+import AuthButton from './components/AuthButton'
 
 export default function page() {
   return (
@@ -20,6 +21,7 @@ export default function page() {
         Learnmore
       </button>
       </Link>
+      <AuthButton/>
       
     </div>
     </center>

@@ -19,6 +19,7 @@ import MoreIcon from "@mui/icons-material/MoreVert";
 import Link from "next/link"
 import { Avatar, ListItemIcon } from "@mui/material"
 import { Logout } from "@mui/icons-material"
+import AuthButton from '@/app/components/AuthButton';
 
 
 const Search = styled("div")(({ theme }) => ({
@@ -60,6 +61,8 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     },
   },
 }));
+
+
 
 export default function PrimarySearchAppBar() {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -104,8 +107,6 @@ export default function PrimarySearchAppBar() {
       onClose={handleMenuClose}
     >
 
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose} href="/">LogOut</MenuItem>
 
       <Link href={"/user"}>
         <MenuItem onClick={handleMenuClose}>
@@ -122,30 +123,6 @@ export default function PrimarySearchAppBar() {
       </Link>
     </Menu>
   );
-
-  const menuid = "primary-search-account-menu";
-  const rendermenu = (
-    <Menu
-      anchorEl={anchorEl}
-      anchorOrigin={{
-        vertical: "top",
-        horizontal: "right",
-      }}
-      id={menuid}
-      keepMounted
-      transformOrigin={{
-        vertical: "top",
-        horizontal: "right",
-      }}
-      open={isMenuOpen}
-      onClose={handleMenuClose}
-    >
-      <MenuItem onClick={handleMenuClose} href="/">หน้าแรก</MenuItem>
-      <MenuItem onClick={handleMenuClose} href="/">กิจกรรม</MenuItem>
-      <MenuItem onClick={handleMenuClose} href="/">บันทึก</MenuItem>
-    </Menu>
-  );
-
   return (
     <div className="h-24 bg-slate-700">
       <Box sx={{ flexGrow: 1 }}>
@@ -177,9 +154,7 @@ export default function PrimarySearchAppBar() {
             <div className=" mx-3">
               <Link href='/activities' className=" hover:text-slate-300">กิจกรรม</Link>
             </div>
-            <div className=" mx-3">
-              <Link href='/save' className=" hover:text-slate-300">บันทึก</Link>
-            </div>
+            
             <Box sx={{ flexGrow: 1 }}/>
 
             <Box sx={{ flexGrow: 1 }} />
