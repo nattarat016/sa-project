@@ -17,6 +17,9 @@ import MailIcon from "@mui/icons-material/Mail";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import Link from "next/link"
+import { Avatar, ListItemIcon } from "@mui/material"
+import { Logout } from "@mui/icons-material"
+
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -100,8 +103,23 @@ export default function PrimarySearchAppBar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
+
       <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
       <MenuItem onClick={handleMenuClose} href="/">LogOut</MenuItem>
+
+      <Link href={"/user"}>
+        <MenuItem onClick={handleMenuClose}>
+          <Avatar sizes="small" /> Profile
+        </MenuItem>
+      </Link>
+      <Link href={"/"}>
+        <MenuItem onClick={handleMenuClose}>
+          <ListItemIcon>
+            <Logout fontSize="small" />
+          </ListItemIcon>
+          Logout
+        </MenuItem>
+      </Link>
     </Menu>
   );
 
