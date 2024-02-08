@@ -16,6 +16,11 @@ import AccountCircle from "@mui/icons-material/AccountCircle";
 import MailIcon from "@mui/icons-material/Mail";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
+import { useState } from "react";
+import { Avatar, ListItemIcon } from "@mui/material";
+import { Logout } from "@mui/icons-material";
+import AuthButton from "./AuthButton";
+import Link from "next/link";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -99,10 +104,19 @@ export default function PrimarySearchAppBar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose} href="/">
-        My account
-      </MenuItem>
+      <Link href={"/user"}>
+        <MenuItem onClick={handleMenuClose}>
+          <Avatar sizes="small" /> Profile
+        </MenuItem>
+      </Link>
+      <Link href={"/"}>
+        <MenuItem onClick={handleMenuClose}>
+          <ListItemIcon>
+            <Logout fontSize="small" />
+          </ListItemIcon>
+          Logout
+        </MenuItem>
+      </Link>
     </Menu>
   );
 
