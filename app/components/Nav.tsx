@@ -16,6 +16,7 @@ import AccountCircle from "@mui/icons-material/AccountCircle";
 import MailIcon from "@mui/icons-material/Mail";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
+import Link from "next/link"
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -100,86 +101,48 @@ export default function PrimarySearchAppBar() {
       onClose={handleMenuClose}
     >
       <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose} href="/">
-        My account
-      </MenuItem>
+      <MenuItem onClick={handleMenuClose} href="/">LogOut</MenuItem>
     </Menu>
   );
 
-  const mobileMenuId = "primary-search-account-menu-mobile";
-  const renderMobileMenu = (
+  const menuid = "primary-search-account-menu";
+  const rendermenu = (
     <Menu
-      anchorEl={mobileMoreAnchorEl}
+      anchorEl={anchorEl}
       anchorOrigin={{
         vertical: "top",
         horizontal: "right",
       }}
-      id={mobileMenuId}
+      id={menuid}
       keepMounted
       transformOrigin={{
         vertical: "top",
         horizontal: "right",
       }}
-      open={isMobileMenuOpen}
-      onClose={handleMobileMenuClose}
+      open={isMenuOpen}
+      onClose={handleMenuClose}
     >
-      <MenuItem>
-        <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-          <Badge badgeContent={4} color="error">
-            <MailIcon />
-          </Badge>
-        </IconButton>
-        <p>Messages</p>
-      </MenuItem>
-      <MenuItem>
-        <IconButton
-          size="large"
-          aria-label="show 17 new notifications"
-          color="inherit"
-        >
-          <Badge badgeContent={17} color="error">
-            <NotificationsIcon />
-          </Badge>
-        </IconButton>
-        <p>Notifications</p>
-      </MenuItem>
-      <MenuItem onClick={handleProfileMenuOpen}>
-        <IconButton
-          size="large"
-          aria-label="account of current user"
-          aria-controls="primary-search-account-menu"
-          aria-haspopup="true"
-          color="inherit"
-        >
-          <AccountCircle />
-        </IconButton>
-        <p>Profile</p>
-      </MenuItem>
+      <MenuItem onClick={handleMenuClose} href="/">หน้าแรก</MenuItem>
+      <MenuItem onClick={handleMenuClose} href="/">กิจกรรม</MenuItem>
+      <MenuItem onClick={handleMenuClose} href="/">บันทึก</MenuItem>
     </Menu>
   );
 
   return (
-    <div className="h-24">
+    <div className="h-24 bg-slate-700">
       <Box sx={{ flexGrow: 1 }}>
         <AppBar>
           <Toolbar>
-            <IconButton
-              size="large"
-              edge="start"
-              color="inherit"
-              aria-label="open drawer"
-              sx={{ mr: 2 }}
-            >
-              <MenuIcon />
-            </IconButton>
+            {/* LOGo */}
             <Typography
               variant="h6"
               noWrap
               component="div"
               sx={{ display: { xs: "none", sm: "block" } }}
             >
-              MUI
+              LOGO
             </Typography>
+            {/* search */}
             <Search>
               <SearchIconWrapper>
                 <SearchIcon />
@@ -189,26 +152,28 @@ export default function PrimarySearchAppBar() {
                 inputProps={{ "aria-label": "search" }}
               />
             </Search>
+            {/* menu */}
+            <div className=" mx-3">
+              <Link href='/' className=" hover:text-slate-300">หน้าแรก</Link>
+            </div>
+            <div className=" mx-3">
+              <Link href='/activities' className=" hover:text-slate-300">กิจกรรม</Link>
+            </div>
+            <div className=" mx-3">
+              <Link href='/save' className=" hover:text-slate-300">บันทึก</Link>
+            </div>
+            <Box sx={{ flexGrow: 1 }}/>
+
             <Box sx={{ flexGrow: 1 }} />
+            <div>
+              <Link href='/login' className=" hover:text-slate-300">
+                Login
+              </Link>
+            </div>
+            
             <Box sx={{ display: { xs: "none", md: "flex" } }}>
-              <IconButton
-                size="large"
-                aria-label="show 4 new mails"
-                color="inherit"
-              >
-                <Badge badgeContent={4} color="error">
-                  <MailIcon />
-                </Badge>
-              </IconButton>
-              <IconButton
-                size="large"
-                aria-label="show 17 new notifications"
-                color="inherit"
-              >
-                <Badge badgeContent={17} color="error">
-                  <NotificationsIcon />
-                </Badge>
-              </IconButton>
+              
+              {/* dropdown */}
               <IconButton
                 size="large"
                 edge="end"
@@ -221,11 +186,11 @@ export default function PrimarySearchAppBar() {
                 <AccountCircle />
               </IconButton>
             </Box>
+            
             <Box sx={{ display: { xs: "flex", md: "none" } }}>
               <IconButton
                 size="large"
                 aria-label="show more"
-                aria-controls={mobileMenuId}
                 aria-haspopup="true"
                 onClick={handleMobileMenuOpen}
                 color="inherit"
@@ -233,9 +198,9 @@ export default function PrimarySearchAppBar() {
                 <MoreIcon />
               </IconButton>
             </Box>
+
           </Toolbar>
         </AppBar>
-        {renderMobileMenu}
         {renderMenu}
       </Box>
     </div>
