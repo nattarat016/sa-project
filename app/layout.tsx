@@ -1,6 +1,6 @@
 import { GeistSans } from "geist/font/sans";
 import "./globals.css";
-import Nav from "@/components/Nav";
+import Nav from "@/app/components/Nav";
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
@@ -8,7 +8,7 @@ const defaultUrl = process.env.VERCEL_URL
 
 export const metadata = {
   metadataBase: new URL(defaultUrl),
-  title: "Next.js a",
+  title: "ระบบบันทึกกิจกรรมจิตอาสา",
   description: "The fastest way to build apps with Next.js and Supabase",
 };
 
