@@ -1,6 +1,4 @@
-import AuthButton from "@/app/components/AuthButton";
-import { register } from "../actions";
-import Link from "next/link";
+
 import { cookies, headers } from "next/headers";
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
