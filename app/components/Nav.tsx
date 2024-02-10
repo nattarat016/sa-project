@@ -7,20 +7,19 @@ import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import InputBase from "@mui/material/InputBase";
-import Badge from "@mui/material/Badge";
+
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
-import MenuIcon from "@mui/icons-material/Menu";
+
 import SearchIcon from "@mui/icons-material/Search";
 import AccountCircle from "@mui/icons-material/AccountCircle";
-import MailIcon from "@mui/icons-material/Mail";
-import NotificationsIcon from "@mui/icons-material/Notifications";
-import MoreIcon from "@mui/icons-material/MoreVert";
-import Link from "next/link"
-import { Avatar, ListItemIcon } from "@mui/material"
-import { Logout } from "@mui/icons-material"
-import AuthButton from '@/app/components/AuthButton';
 
+import MoreIcon from "@mui/icons-material/MoreVert";
+import Link from "next/link";
+import { Avatar, ListItemIcon } from "@mui/material";
+import { Logout } from "@mui/icons-material";
+
+import { useEffect, useState } from "react";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -62,15 +61,28 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-
-
-export default function PrimarySearchAppBar() {
+export default function PrimarySearchAppBar(props: any) {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] =
     React.useState<null | HTMLElement>(null);
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+
+  const [user, setUser] = useState<null | any>(null);
+
+  const isLogin = async () => {
+    const value = await props.userName.value;
+    if (value != "null") {
+      return setUser("hey");
+    } else {
+      return setUser("Login");
+    }
+  };
+
+  useEffect(() => {
+    isLogin();
+  }, [props]);
 
   const handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -106,8 +118,6 @@ export default function PrimarySearchAppBar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-
-
       <Link href={"/user"}>
         <MenuItem onClick={handleMenuClose}>
           <Avatar sizes="small" /> Profile
@@ -149,23 +159,25 @@ export default function PrimarySearchAppBar() {
             </Search>
             {/* menu */}
             <div className=" mx-3">
-              <Link href='/' className=" hover:text-slate-300">หน้าแรก</Link>
-            </div>
-            <div className=" mx-3">
-              <Link href='/activities' className=" hover:text-slate-300">กิจกรรม</Link>
-            </div>
-            
-            <Box sx={{ flexGrow: 1 }}/>
-
-            <Box sx={{ flexGrow: 1 }} />
-            <div>
-              <Link href='/login' className=" hover:text-slate-300">
-                Login
+              <Link href="/" className=" hover:text-slate-300">
+                หน้าแรก
               </Link>
             </div>
-            
+            <div className=" mx-3">
+              <Link href="/activities" className=" hover:text-slate-300">
+                กิจกรรม
+              </Link>
+            </div>
+
+            <Box sx={{ flexGrow: 1 }} />
+
+            <Box sx={{ flexGrow: 1 }} />
+
+            <Link href="/login" className=" hover:text-slate-300">
+              {user}
+            </Link>
+
             <Box sx={{ display: { xs: "none", md: "flex" } }}>
-              
               {/* dropdown */}
               <IconButton
                 size="large"
@@ -179,7 +191,7 @@ export default function PrimarySearchAppBar() {
                 <AccountCircle />
               </IconButton>
             </Box>
-            
+
             <Box sx={{ display: { xs: "flex", md: "none" } }}>
               <IconButton
                 size="large"
@@ -191,7 +203,6 @@ export default function PrimarySearchAppBar() {
                 <MoreIcon />
               </IconButton>
             </Box>
-
           </Toolbar>
         </AppBar>
         {renderMenu}
