@@ -1,26 +1,19 @@
 "use server";
 import { createClient } from "@/utils/supabase/server";
 import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
-export async function register(formdata: FormData) {
-  const fullname = formdata.get("fullname");
-  const email = formdata.get("email");
-  const password = formdata.get("password");
+export async function getUser() {
+    const cookieStore = cookies();
+    const supabase = createClient(cookieStore);
+  
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+    console.log(user)
 
-  const cookieStore = cookies();
-  const supabase = createClient(cookieStore);
-
-  const { data, error } = await supabase
-    .from("users")
-    .insert([{
-        fullname,
-        email,
-        password
-    }])
-
-    if (error){
-        return console.log("error",error)
+    if (!user){
+        return null
     }
-
-    console.log("registed")
+    return user.email
 }
