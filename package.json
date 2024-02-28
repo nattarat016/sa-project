@@ -13,6 +13,7 @@
     "@mui/material": "^5.15.7",
     "@supabase/ssr": "latest",
     "@supabase/supabase-js": "latest",
+    "@types/uuid": "^9.0.8",
     "autoprefixer": "10.4.17",
     "geist": "^1.2.1",
     "next": "latest",
@@ -21,7 +22,8 @@
     "react-dom": "18.2.0",
     "server-only": "^0.0.1",
     "tailwindcss": "3.4.1",
-    "typescript": "5.3.3"
+    "typescript": "5.3.3",
+    "uuid": "^9.0.1"
   },
   "devDependencies": {
     "@types/node": "20.11.5",
