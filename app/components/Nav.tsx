@@ -92,40 +92,40 @@ export default function PrimarySearchAppBar() {
     setMobileMoreAnchorEl(event.currentTarget)
   }
 
-  const menuId = "primary-search-account-menu"
-  const renderMenu = (
-    <Menu
-      anchorEl={anchorEl}
-      anchorOrigin={{
-        vertical: "top",
-        horizontal: "right",
-      }}
-      id={menuId}
-      keepMounted
-      transformOrigin={{
-        vertical: "top",
-        horizontal: "right",
-      }}
-      open={isMenuOpen}
-      onClose={handleMenuClose}
-    >
+  // const menuId = "primary-search-account-menu"
+  // const renderMenu = (
+  //   <Menu
+  //     anchorEl={anchorEl}
+  //     anchorOrigin={{
+  //       vertical: "top",
+  //       horizontal: "right",
+  //     }}
+  //     id={menuId}
+  //     keepMounted
+  //     transformOrigin={{
+  //       vertical: "top",
+  //       horizontal: "right",
+  //     }}
+  //     open={isMenuOpen}
+  //     onClose={handleMenuClose}
+  //   >
 
 
-      <Link href={"/protected/user"}>
-        <MenuItem onClick={handleMenuClose}>
-          <Avatar sizes="small" /> Profile
-        </MenuItem>
-      </Link>
-      <Link href={"/"}>
-        <MenuItem onClick={handleMenuClose}>
-          <ListItemIcon>
-            <Logout fontSize="small" />
-          </ListItemIcon>
-          Logout
-        </MenuItem>
-      </Link>
-    </Menu>
-  )
+  //     {/* <Link href={"/protected/user"}>
+  //       <MenuItem onClick={handleMenuClose}>
+  //         <Avatar sizes="small" /> Profile
+  //       </MenuItem>
+  //     </Link>
+  //     <Link href={"/"}>
+  //       <MenuItem onClick={handleMenuClose}>
+  //         <ListItemIcon>
+  //           <Logout fontSize="small" />
+  //         </ListItemIcon>
+  //         Logout
+  //       </MenuItem>
+  //     </Link>
+  //   </Menu> */}
+  // )
 
   return (
     <div className="h-24 bg-slate-700">
@@ -175,7 +175,7 @@ export default function PrimarySearchAppBar() {
                   size="large"
                   edge="end"
                   aria-label="account of current user"
-                  aria-controls={menuId}
+                  // aria-controls={menuId}
                   aria-haspopup="true"
                   onClick={handleProfileMenuOpen}
                   color="inherit"
@@ -199,7 +199,7 @@ export default function PrimarySearchAppBar() {
 
           </Toolbar>
         </AppBar>
-        {renderMenu}
+        {/* {renderMenu} */}
       </Box>
     </div>
   )
