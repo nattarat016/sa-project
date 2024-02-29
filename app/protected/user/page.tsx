@@ -1,20 +1,20 @@
-import AuthButton from "@/app/components/AuthButton"
-import { createClient } from "@/utils/supabase/server"
-import { cookies } from "next/headers"
-import Link from "next/link"
-import { redirect } from 'next/navigation'
-import React from 'react'
+import AuthButton from "@/components/AuthButton";
+import { createClient } from "@/utils/supabase/server";
+import { cookies } from "next/headers";
+import Link from "next/link";
+import { redirect } from "next/navigation";
+import React from "react";
 
 export default async function page() {
-  const cookieStore = cookies()
-  const supabase = createClient(cookieStore)
+  const cookieStore = cookies();
+  const supabase = createClient(cookieStore);
 
   const {
     data: { user },
-  } = await supabase.auth.getUser()
+  } = await supabase.auth.getUser();
 
   if (!user) {
-    return redirect("/login")
+    return redirect("/login");
   }
 
   return (
@@ -30,20 +30,16 @@ export default async function page() {
       <div className="grid grid-rows-3 grid-flow-col gap-4">
         <div className="row-span-3 justify-start gap-4">
           <div className="flex flex-col w-full px-8 sm:max-w-md justify-center gap-2 border-white border-2 rounded-md">
-            picture
-            ______________________________________________
-
-            name :
-            ______________________________________________
-            like :
+            picture ______________________________________________ name :
+            ______________________________________________ like :
           </div>
         </div>
         <div className="col-span-2  justify-between">
           <h4 className="font-bold text-4xl mb-4">Activities</h4>
-          <Link href='/create'>
+          <Link href="/create">
             <button className="btn bg-yellow-300 text-slate-900">Add</button>
           </Link>
-          <Link href='#'>
+          <Link href="#">
             <button className="btn bg-red-600 text-white">Delete</button>
           </Link>
         </div>
@@ -56,5 +52,5 @@ export default async function page() {
         </div>
       </div>
     </div>
-  )
+  );
 }

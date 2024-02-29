@@ -1,4 +1,4 @@
-import AuthButton from "@/app/components/AuthButton";
+import AuthButton from "@/components/AuthButton";
 import { register } from "../actions";
 import Link from "next/link";
 import { cookies, headers } from "next/headers";
@@ -18,7 +18,7 @@ export default async function Index({
     const password = formData.get("password") as string;
     const cookieStore = cookies();
     const supabase = createClient(cookieStore);
-    console.log(email,password)
+    console.log(email, password);
 
     const { error } = await supabase.auth.signUp({
       email,
@@ -29,11 +29,9 @@ export default async function Index({
     });
 
     if (error) {
-      console.log(error)
+      console.log(error);
       return redirect("/register?message=Could not authenticate user");
     }
-
-    
 
     return redirect(
       "/register?message=Check email to continue sign in process"
@@ -75,12 +73,12 @@ export default async function Index({
               </label>
               <br />
               <input
-          className="rounded-md px-4 py-2 bg-inherit border mb-6"
-          type="password"
-          name="password"
-          placeholder="••••••••"
-          required
-        />
+                className="rounded-md px-4 py-2 bg-inherit border mb-6"
+                type="password"
+                name="password"
+                placeholder="••••••••"
+                required
+              />
             </div>
             <button
               // formAction={signUp}
@@ -89,14 +87,13 @@ export default async function Index({
               Sign Up
             </button>
             {searchParams?.message && (
-          <p className="mt-4 p-4 bg-foreground/10 text-foreground text-center ">
-            {searchParams.message}
-          </p>
-        )}
+              <p className="mt-4 p-4 bg-foreground/10 text-foreground text-center ">
+                {searchParams.message}
+              </p>
+            )}
           </form>
         </main>
       </div>
-      
     </div>
   );
 }
