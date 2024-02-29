@@ -1,25 +1,28 @@
-"use client";
-import * as React from "react";
-import { styled, alpha } from "@mui/material/styles";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
-import InputBase from "@mui/material/InputBase";
-import Badge from "@mui/material/Badge";
-import MenuItem from "@mui/material/MenuItem";
-import Menu from "@mui/material/Menu";
-import MenuIcon from "@mui/icons-material/Menu";
-import SearchIcon from "@mui/icons-material/Search";
-import AccountCircle from "@mui/icons-material/AccountCircle";
-import MailIcon from "@mui/icons-material/Mail";
-import NotificationsIcon from "@mui/icons-material/Notifications";
-import MoreIcon from "@mui/icons-material/MoreVert";
+"use client"
+import * as React from "react"
+import { styled, alpha } from "@mui/material/styles"
+import AppBar from "@mui/material/AppBar"
+import Box from "@mui/material/Box"
+import Toolbar from "@mui/material/Toolbar"
+import IconButton from "@mui/material/IconButton"
+import Typography from "@mui/material/Typography"
+import InputBase from "@mui/material/InputBase"
+import Badge from "@mui/material/Badge"
+import MenuItem from "@mui/material/MenuItem"
+import Menu from "@mui/material/Menu"
+import MenuIcon from "@mui/icons-material/Menu"
+import SearchIcon from "@mui/icons-material/Search"
+import AccountCircle from "@mui/icons-material/AccountCircle"
+import MailIcon from "@mui/icons-material/Mail"
+import NotificationsIcon from "@mui/icons-material/Notifications"
+import MoreIcon from "@mui/icons-material/MoreVert"
 import Link from "next/link"
 import { Avatar, ListItemIcon } from "@mui/material"
 import { Logout } from "@mui/icons-material"
-import AuthButton from '@/app/components/AuthButton';
+import AuthButton from '@/app/components/AuthButton'
+import { cookies } from "next/headers"
+import { createClient } from "@/utils/supabase/server"
+import { redirect } from "next/navigation"
 
 
 const Search = styled("div")(({ theme }) => ({
@@ -36,7 +39,7 @@ const Search = styled("div")(({ theme }) => ({
     marginLeft: theme.spacing(3),
     width: "auto",
   },
-}));
+}))
 
 const SearchIconWrapper = styled("div")(({ theme }) => ({
   padding: theme.spacing(0, 2),
@@ -46,7 +49,7 @@ const SearchIconWrapper = styled("div")(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-}));
+}))
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
   color: "inherit",
@@ -60,36 +63,36 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
       width: "20ch",
     },
   },
-}));
+}))
 
 
 
 export default function PrimarySearchAppBar() {
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] =
-    React.useState<null | HTMLElement>(null);
+    React.useState<null | HTMLElement>(null)
 
-  const isMenuOpen = Boolean(anchorEl);
-  const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+  const isMenuOpen = Boolean(anchorEl)
+  const isMobileMenuOpen = Boolean(mobileMoreAnchorEl)
 
   const handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
+    setAnchorEl(event.currentTarget)
+  }
 
   const handleMobileMenuClose = () => {
-    setMobileMoreAnchorEl(null);
-  };
+    setMobileMoreAnchorEl(null)
+  }
 
   const handleMenuClose = () => {
-    setAnchorEl(null);
-    handleMobileMenuClose();
-  };
+    setAnchorEl(null)
+    handleMobileMenuClose()
+  }
 
   const handleMobileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
-    setMobileMoreAnchorEl(event.currentTarget);
-  };
+    setMobileMoreAnchorEl(event.currentTarget)
+  }
 
-  const menuId = "primary-search-account-menu";
+  const menuId = "primary-search-account-menu"
   const renderMenu = (
     <Menu
       anchorEl={anchorEl}
@@ -122,7 +125,8 @@ export default function PrimarySearchAppBar() {
         </MenuItem>
       </Link>
     </Menu>
-  );
+  )
+
   return (
     <div className="h-24 bg-slate-700">
       <Box sx={{ flexGrow: 1 }}>
@@ -152,10 +156,10 @@ export default function PrimarySearchAppBar() {
               <Link href='/' className=" hover:text-slate-300">หน้าแรก</Link>
             </div>
             <div className=" mx-3">
-              <Link href='/activities' className=" hover:text-slate-300">กิจกรรม</Link>
+              <Link href='/protected/activities' className=" hover:text-slate-300">กิจกรรม</Link>
             </div>
-            
-            <Box sx={{ flexGrow: 1 }}/>
+
+            <Box sx={{ flexGrow: 1 }} />
 
             <Box sx={{ flexGrow: 1 }} />
             <div>
@@ -163,23 +167,24 @@ export default function PrimarySearchAppBar() {
                 Login
               </Link>
             </div>
-            
+
             <Box sx={{ display: { xs: "none", md: "flex" } }}>
-              
-              {/* dropdown */}
-              <IconButton
-                size="large"
-                edge="end"
-                aria-label="account of current user"
-                aria-controls={menuId}
-                aria-haspopup="true"
-                onClick={handleProfileMenuOpen}
-                color="inherit"
-              >
-                <AccountCircle />
-              </IconButton>
+
+              <Link href='/protected/user'>
+                <IconButton
+                  size="large"
+                  edge="end"
+                  aria-label="account of current user"
+                  aria-controls={menuId}
+                  aria-haspopup="true"
+                  onClick={handleProfileMenuOpen}
+                  color="inherit"
+                >
+                  <AccountCircle />
+                </IconButton>
+              </Link>
             </Box>
-            
+
             <Box sx={{ display: { xs: "flex", md: "none" } }}>
               <IconButton
                 size="large"
@@ -197,5 +202,5 @@ export default function PrimarySearchAppBar() {
         {renderMenu}
       </Box>
     </div>
-  );
+  )
 }

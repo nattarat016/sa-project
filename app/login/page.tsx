@@ -1,32 +1,32 @@
-import Link from "next/link";
-import { headers, cookies } from "next/headers";
-import { createClient } from "@/utils/supabase/server";
-import { redirect } from "next/navigation";
-import AuthButton from "@/app/components/AuthButton";
+import Link from "next/link"
+import { headers, cookies } from "next/headers"
+import { createClient } from "@/utils/supabase/server"
+import { redirect } from "next/navigation"
+import AuthButton from "@/app/components/AuthButton"
 
 export default function Login({
   searchParams,
 }: {
-  searchParams: { message: string };
+  searchParams: { message: string }
 }) {
   const signIn = async (formData: FormData) => {
-    "use server";
-    const email = formData.get("email") as string;
-    const password = formData.get("password") as string;
-    const cookieStore = cookies();
-    const supabase = createClient(cookieStore);
+    "use server"
+    const email = formData.get("email") as string
+    const password = formData.get("password") as string
+    const cookieStore = cookies()
+    const supabase = createClient(cookieStore)
 
     const { error } = await supabase.auth.signInWithPassword({
       email,
       password,
-    });
+    })
 
     if (error) {
-      return redirect("/register?message=Could not authenticate user");
+      return redirect("/register?message=Could not authenticate user")
     }
 
-    return redirect("/user");
-  };
+    return redirect("/protected/user")
+  }
 
   return (
     <div className=" py-20 flex flex-col w-full px-8 sm:max-w-md justify-center gap-2">
@@ -67,5 +67,5 @@ export default function Login({
         )}
       </form>
     </div>
-  );
+  )
 }
