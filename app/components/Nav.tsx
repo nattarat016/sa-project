@@ -111,7 +111,7 @@ export default function PrimarySearchAppBar() {
     >
 
 
-      <Link href={"/user"}>
+      <Link href={"/protected/user"}>
         <MenuItem onClick={handleMenuClose}>
           <Avatar sizes="small" /> Profile
         </MenuItem>
