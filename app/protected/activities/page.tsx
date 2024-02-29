@@ -53,9 +53,12 @@ export default async function RecipeReviewCard() {
         <nav className="w-full flex justify-center border-b border-b-foreground/10 h-16">
           <div className="w-full max-w-4xl flex justify-between items-center p-3 text-sm">
             <h2 className="font-bold text-4xl mb-4">Activities</h2>
-            <div>
+            <div className=" gap-2">
               <Link href='/create'>
-                <button className="btn btn-active btn-accent">Create</button>
+                <button className="btn bg-yellow-300 text-slate-900">Create</button>
+              </Link>
+              <Link href='#'>
+                <button className="btn bg-red-600 text-white">Delete</button>
               </Link>
             </div>
           </div>
@@ -63,7 +66,7 @@ export default async function RecipeReviewCard() {
       </div>
       <div className="grid grid-rows-3 grid-flow-col gap-4">
         <div className="row-span-3 justify-start gap-4">
-          <div className="flex flex-col w-full px-8 sm:max-w-md justify-center gap-2">
+          <div className="flex flex-col w-full px-8 sm:max-w-md  gap-2">
             <div>
               {activities?.map((Attri, index) => (
                 <div
