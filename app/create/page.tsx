@@ -3,8 +3,13 @@ import { SubmitButton } from "./submit-button";
 import { createClient } from "@/utils/supabase/client";
 import { v4 as uuidv4 } from "uuid";
 import { log } from "console";
+import { redirect } from "next/navigation";
 
-export default function page() {
+export default function page({
+  searchParams,
+}: {
+  searchParams: { message: string };
+}) {
   const create = async (formData: FormData) => {
     "use server";
     const name = formData.get("name") as string;
@@ -41,11 +46,10 @@ export default function page() {
       },
     ]);
     if (error) {
-      log(555);
-      // return redirect("/user/novels/create?message=create error");
+      return redirect("/create?message=Create fail");
     }
 
-    // return redirect("/user/novels");
+    return redirect("/create?message=Create success");
   };
 
   return (
@@ -89,11 +93,11 @@ export default function page() {
           >
             Create
           </SubmitButton>
-          {/* {searchParams?.message && (
+          {searchParams?.message && (
             <p className="mt-4 p-4 bg-foreground/10 text-foreground text-center">
               {searchParams.message}
             </p>
-          )} */}
+          )}
         </form>
       </div>
     </div>
