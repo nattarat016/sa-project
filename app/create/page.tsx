@@ -80,6 +80,7 @@ export default function page() {
             className="rounded-md px-4 py-2 bg-inherit border mb-6"
             name="file"
             placeholder="yourname"
+            required
           />
           <SubmitButton
             formAction={create}
