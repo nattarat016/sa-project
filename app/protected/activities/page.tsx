@@ -34,10 +34,10 @@ export default async function RecipeReviewCard() {
   let { data: activities, error } = await supabase
     .from("activities")
     .select("*")
+    .order("id", { ascending: false })
 
   if (error) return redirect("/")
 
-  console.log(activities)
 
   const {
     data: { user },
