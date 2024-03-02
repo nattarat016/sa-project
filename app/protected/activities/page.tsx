@@ -1,10 +1,11 @@
 import * as React from "react"
-import { styled } from "@mui/material/styles"
-import IconButton, { IconButtonProps } from "@mui/material/IconButton"
 import { redirect } from "next/navigation"
 import { createClient } from "@/utils/supabase/server"
 import { cookies } from "next/headers"
 import Link from "next/link"
+import Stack from "@mui/material/Stack"
+import Pagination from "@mui/material/Pagination"
+
 class Fakedata {
   Name: string | undefined
   Description: string | undefined
@@ -30,10 +31,12 @@ const post = [
 export default async function RecipeReviewCard() {
   const cookieStore = cookies()
   const supabase = createClient(cookieStore)
+  
 
   let { data: activities, error } = await supabase
     .from("activities")
     .select("*")
+    .range(0,3)
     .order("id", { ascending: false })
 
   if (error) return redirect("/")
@@ -48,6 +51,7 @@ export default async function RecipeReviewCard() {
   }
 
   return (
+    
     <div className="flex-1 w-full flex flex-col gap-20 items-center py-10">
       <div className="w-full">
         <nav className="w-full flex justify-center border-b border-b-foreground/10 h-16">
@@ -79,6 +83,12 @@ export default async function RecipeReviewCard() {
       </div>
       </div>
               ))}
+      <div className="  text-white ">
+     <Stack spacing={3}>
+     <Pagination count={10} shape="rounded" />
+    </Stack>
     </div>
+    </div>
+    
   )
 }

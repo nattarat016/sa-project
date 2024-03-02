@@ -40,6 +40,9 @@ export default async function page() {
                 <br />
               <p className=" text-center">หน่วยกิตทั้งหมด : 100/100</p>
               <p className=" text-center">หน่วยกิตบัจจุบัน : 23/100</p>
+              <div className='flex justify-center items-center gap-6 py-6'>
+                  <button className='text-white uppercase bg-gradient-to-r hover:bg-gradient-to-l from-cyan-500 to-blue-500 p-3 font-semibold rounded-lg w-11/12 '>PDF Dowload</button>
+                </div>
             </div>     
           </div>
         </div>
@@ -59,9 +62,6 @@ export default async function page() {
               <h3 className='font-semibold text-md uppercase text-center py-2 text-black'>About</h3>
               <p className='text-sm text-neutral-600 text-center mx-10'>แสดงโพสทั้งหมดที่ทำมา</p>
               <p className='text-sm text-neutral-600 text-center mx-10'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum iusto itaque adipisci magni? Veniam cumque natus in porro pariatur autem soluta tempora, iure, rerum odio facere quis laudantium, esse consequuntur?</p>
-              <div className='flex justify-center items-center gap-6 py-6'>
-              <button className='text-white uppercase bg-gradient-to-r hover:bg-gradient-to-l from-cyan-500 to-blue-500 p-3 font-semibold rounded-lg w-11/12 '>PDF Dowload</button>
-              </div>
              </div>      
     </div>
         </div>
