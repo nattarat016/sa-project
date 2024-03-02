@@ -64,30 +64,21 @@ export default async function RecipeReviewCard() {
           </div>
         </nav>
       </div>
-      <div className="grid grid-rows-3 grid-flow-col gap-4">
-        <div className="row-span-3 justify-start gap-4">
-          <div className="flex flex-col w-full px-8 sm:max-w-md  gap-2">
-            <div>
-              {activities?.map((Attri, index) => (
+      
+      {activities?.map((Attri, index) => (
                 <div
                   key={index}
-                  className="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+                  className=" w-96 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
                 >
-                  <img className="rounded-t-lg" src={Attri.imgurl} alt="" />
-                  <div className="p-5">
-                    <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                      {Attri.name}
-                    </h5>
-                    <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
-                      {Attri.description}
-                    </p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
+      <div className="card mb-3">
+      <img className="card-img-top" src={Attri.imgurl} alt="Card image cap"/>
+      <div className="card-body">
+      <h5 className="card-title">{Attri.name}</h5>
+      <p className="card-text">{Attri.description}</p>
       </div>
+      </div>
+      </div>
+              ))}
     </div>
   )
 }
