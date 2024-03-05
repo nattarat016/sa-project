@@ -3,16 +3,18 @@ import { createClient } from "@/utils/supabase/server";
 import { cookies } from "next/headers";
 import Link from "next/link";
 import RecipeReviewCard from "@/components/activitiesMember";
+import { redirect } from "next/navigation";
 
 export default async function edit({
   searchParams,
 }: {
   searchParams: { message: string };
 }) {
+  const cookieStore = cookies();
+  const supabase = createClient(cookieStore);
+
   const _delete = async (FormData: FormData) => {
     "use server";
-    const cookieStore = cookies();
-    const supabase = createClient(cookieStore);
 
     const postId = FormData.get("postId") as unknown as number;
     const { error } = await supabase
@@ -20,7 +22,21 @@ export default async function edit({
       .delete()
       .eq("id", postId);
     console.log(error);
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+
+    if (!user) {
+      return redirect("/login");
+    }
   };
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) {
+    return redirect("/login");
+  }
 
   return (
     <div className="flex-1 w-full flex flex-col gap-20 items-center py-10">
@@ -67,8 +83,8 @@ export default async function edit({
             </button>
           </form>
         </div>
-         <RecipeReviewCard/>
-    </div>
+        <RecipeReviewCard />
+      </div>
     </div>
   );
 }
