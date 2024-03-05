@@ -11,33 +11,26 @@ export default async function edit({
   searchParams: { message: string };
 }) {
   const cookieStore = cookies();
-  const supabase = createClient(cookieStore);
-
+    const supabase = createClient(cookieStore);
   const _delete = async (FormData: FormData) => {
     "use server";
-
+    const cookieStore = cookies();
+    const supabase = createClient(cookieStore);
+    
     const postId = FormData.get("postId") as unknown as number;
     const { error } = await supabase
       .from("activities")
       .delete()
       .eq("id", postId);
     console.log(error);
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
-
-    if (!user) {
-      return redirect("/login");
-    }
   };
   const {
     data: { user },
-  } = await supabase.auth.getUser();
+  } = await supabase.auth.getUser()
 
   if (!user) {
-    return redirect("/login");
+    return redirect("/login")
   }
-
   return (
     <div className="flex-1 w-full flex flex-col gap-20 items-center py-10">
       <div className="w-full">
@@ -75,10 +68,7 @@ export default async function edit({
                 {searchParams.message}
               </p>
             )}
-            <button
-              // formAction={signUp}
-              className="bg-red-700  text-white hover:bg-red-600 rounded-md px-4 py-2 text-foreground mb-2"
-            >
+            <button className="bg-red-700  text-white hover:bg-red-600 rounded-md px-4 py-2 text-foreground mb-2">
               Delete Post
             </button>
           </form>

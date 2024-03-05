@@ -7,6 +7,7 @@ import Stack from "@mui/material/Stack"
 import Pagination from "@mui/material/Pagination"
 
 export default async function RecipeReviewCard() {
+  "use server"
   const cookieStore = cookies()
   const supabase = createClient(cookieStore)
   
