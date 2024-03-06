@@ -32,7 +32,7 @@ export default async function page() {
           <div className='cursor-pointer m-1 rounded-2xl flex flex-col justify-start items-center w-96 border-8 border-gradient-to-l from-white via-white to-white bg-gradient-to-tr h-3/4'>
             <div className=" text-black justify-between">
               <div className='flex justify-center items-center py-4'>
-                <img src='https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.pngwing.com%2Fen%2Fsearch%3Fq%3Duser%2BAvatar&psig=AOvVaw2_PtIwL1B-9hZDIPyJTpJ0&ust=1709436723955000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCKjso5TS1IQDFQAAAAAdAAAAABAq' alt="" width="90" height="90" className='rounded-lg sepia '/>
+                <img src='https://www.pngall.com/wp-content/uploads/5/User-Profile-PNG-Free-Download.png' alt="" width="90" height="90" className='rounded-lg sepia '/>
               </div>
                 <h1 className='text-neutral-700 font-bold text-2xl text-center'>Gmail : {user.email}!</h1>
                 <br />
@@ -46,24 +46,34 @@ export default async function page() {
             </div>     
           </div>
         </div>
-        <div className="col-span-2  justify-between">
-          <h4 className="font-bold text-4xl mb-4">Activities</h4>
+        <div className="col-span-2  justify-between items-center gap-2">
+          <h4 className="font-bold text-4xl mb-4">Activities History</h4>
+          <div className="items-center gap-2">
           <Link href="/create">
             <button className="btn bg-yellow-300 text-slate-900">Add</button>
           </Link>
           <Link href="#">
             <button className="btn bg-red-600 text-white">Delete</button>
           </Link>
+          </div>
         </div>
         <div className="row-span-2 col-span-2 ...">
         <div className='cursor-pointer m-1 rounded-2xl flex flex-col justify-start items-center w-96 border-8 border-gradient-to-l from-white via-white to-white bg-gradient-to-tr h-3/4'>
           <div>
-              <h1 className='text-neutral-700 font-bold text-3xl text-center'>Post</h1>
-              <h3 className='font-semibold text-md uppercase text-center py-2 text-black'>About</h3>
-              <p className='text-sm text-neutral-600 text-center mx-10'>แสดงโพสทั้งหมดที่ทำมา</p>
-              <p className='text-sm text-neutral-600 text-center mx-10'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum iusto itaque adipisci magni? Veniam cumque natus in porro pariatur autem soluta tempora, iure, rerum odio facere quis laudantium, esse consequuntur?</p>
+              <h1 className='text-neutral-700 font-bold text-3xl text-center'>----</h1>
+              <h3 className='font-semibold text-md uppercase text-center py-2 text-black'>history</h3>
+              <div className=" w-fit bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+      <div className="card mb-3">
+      <img className="card-img-top" src='https://www.nara2.go.th/wp-content/uploads/2022/05/%E0%B8%9B%E0%B8%81%E0%B8%82%E0%B9%88%E0%B8%B2%E0%B8%A7-18-1920x960.png' alt="Card image cap"/>
+      <div className="card-body">
+      <h5 className="card-title">ลงวินโดว์ให้โรงเรียน</h5>
+      <p className="card-text">ลงวินโดว์ให้โรงเรียนปฐมศึกษา เป็นเวลา 8 ชั่วโมง</p>
+      <p className="card-text">หน่วยกิต : 20 หน่วย</p>
+      </div>
+      </div>
+      </div>
              </div>      
-    </div>
+          </div>
         </div>
       </div>
     </div>
