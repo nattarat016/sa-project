@@ -15,14 +15,13 @@ export default async function RecipeReviewCard() {
   let { data: activities, error } = await supabase
     .from("activities")
     .select("*")
-    .range(0,3)
     .order("id", { ascending: false })
 
   if (error) return redirect("/")
 
   return (
     
-    <div className="flex-1 w-full flex flex-col gap-20 items-center py-10">
+    <div className="flex gap-2 py-10 grid grid-cols-3 grid-flow-row">
       {activities?.map((Attri, index) => (
                 <div
                   key={index}
@@ -33,15 +32,11 @@ export default async function RecipeReviewCard() {
       <div className="card-body">
       <h5 className="card-title">{Attri.name}</h5>
       <p className="card-text">{Attri.description}</p>
+      <p className="card-text">หน่วยกิต : {Attri.activityunit} หน่วย</p>
       </div>
       </div>
       </div>
               ))}
-      <div className="  text-white ">
-     <Stack spacing={3}>
-     <Pagination count={10} shape="rounded" />
-    </Stack>
-    </div>
     </div>
     
   )

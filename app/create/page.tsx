@@ -4,6 +4,7 @@ import { createClient } from "@/utils/supabase/client";
 import { v4 as uuidv4 } from "uuid";
 import { log } from "console";
 import { redirect } from "next/navigation";
+import Activities from "../protected/activities/page";
 
 export default function page({
   searchParams,
@@ -14,6 +15,7 @@ export default function page({
     "use server";
     const name = formData.get("name") as string;
     const description = formData.get("description") as string;
+    const activityunit = formData.get("activityunit") as string;
     const file = formData.get("file") as File;
     const supabase = createClient();
     const pathfile = uuidv4();
@@ -42,6 +44,7 @@ export default function page({
       {
         name,
         description,
+        activityunit,
         imgurl: url,
       },
     ]);
@@ -74,6 +77,15 @@ export default function page({
             className="rounded-md px-4 py-2 bg-inherit border mb-6 w-fit"
             name="description"
             placeholder="description..."
+            required
+          />
+          <label className="text-md" htmlFor="activityunit">
+            Activity Unit
+          </label>
+          <input
+            className="rounded-md px-4 py-2 bg-inherit border mb-6"
+            name="activityunit"
+            placeholder="Activity unit"
             required
           />
           <label className="text-md" htmlFor="file">
